@@ -17,3 +17,9 @@ Write a solution to report the fraction of players that logged in again on the d
 
 
 Solution:
+SELECT ROUND(SUM(CASE WHEN DATEDIFF(a2.mindate, a1.event_date) = -1 THEN 1 ELSE 0 END) / COUNT(DISTINCT a1.player_id), 2) AS fraction
+FROM (
+    SELECT player_id, MIN(event_date) AS mindate
+    FROM activity
+    GROUP BY player_id) AS a2
+LEFT JOIN activity a1 ON a1.player_id = a2.player_id
