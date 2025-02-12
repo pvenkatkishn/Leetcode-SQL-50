@@ -18,3 +18,18 @@ Return the result table in any order.
 
 
 Solution:
+WITH cte as (
+    SELECT product_id, MAX(change_date) as maxdate
+    FROM products
+    WHERE change_date <= "2019-08-16"
+    GROUP BY product_id  
+)
+(SELECT product_id, new_price as price
+FROM products
+WHERE (product_id, change_date) IN (SELECT product_id, maxdate FROM cte))
+UNION
+(
+SELECT product_id, 10 
+FROM products
+WHERE change_date > "2019-08-16" and product_id NOT IN (SELECT product_id FROM cte)
+GROUP BY product_id )
