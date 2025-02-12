@@ -15,3 +15,6 @@ This repository contains my solutions to the LeetCode SQL 50 Challenge, which fe
 -CASE & Conditional Statements
 
 -Advanced SQL Concepts (Self Joins, UNION, EXISTS, NOT EXISTS)
+
+
+I have also attached the link to every problem I solved under the description section of the problem, Please feel free to check it out :)
