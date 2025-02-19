@@ -23,3 +23,9 @@ Note that only one person can board the bus at any given turn.
 
 
 Solution:
+WITH cte AS (SELECT turn, person_name, SUM(weight) OVER(ORDER BY turn) AS total
+FROM queue)
+
+SELECT person_name
+FROM queue
+WHERE turn = (SELECT MAX(turn) as last_turn FROM cte WHERE total <= 1000)
